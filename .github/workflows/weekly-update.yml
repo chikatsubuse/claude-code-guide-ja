@@ -202,7 +202,7 @@ jobs:
 
       # ─────────────────────────────────────────────
       - name: Create Pull Request
-        if: steps.gate.outputs.skip != 'true' && steps.diff.outputs.has_changes == 'true' && inputs.dry_run != true
+        if: steps.gate.outputs.skip != 'true' && steps.diff.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: "Weekly update: ${{ steps.week.outputs.week }}"
@@ -214,11 +214,10 @@ jobs:
             weekly-update
             auto-generated
           draft: false
-          sign-commits: true
 
       # ─────────────────────────────────────────────
       - name: Dry-run summary
-        if: inputs.dry_run == true
+        if: github.event.inputs.dry_run == 'true'
         run: |
           echo "==> Dry run completed. No PR created."
           echo "==> Changes detected:"
