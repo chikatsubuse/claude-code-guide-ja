@@ -1,0 +1,131 @@
+site_name: Claude Code 入門ガイド (日本語)
+site_description: Claude Code の使い方を週次で最新化する日本語入門ガイド
+site_url: https://chikatsubuse.github.io/claude-code-guide-ja/
+repo_url: https://github.com/chikatsubuse/claude-code-guide-ja
+repo_name: chikatsubuse/claude-code-guide-ja
+edit_uri: edit/master/guide/
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: ja
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - navigation.path
+    - navigation.indexes
+    - toc.follow
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+  palette:
+    # ライトモード
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: ダークモードに切替
+    # ダークモード
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: ライトモードに切替
+  font:
+    text: Noto Sans JP
+    code: JetBrains Mono
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+
+markdown_extensions:
+  # Markdown 標準拡張
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: "#"
+      toc_depth: 3
+  - tables
+  # Python-Markdown extensions
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.tilde
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search:
+      lang: ja
+
+# ナビゲーション (章順)
+nav:
+  - はじめに:
+      - 概要: index.md
+      - 0. この1年で変わったこと: 01-whats-changed.md
+  - 第1部 Getting your feet wet:
+      - 1. インストール・モデル選択・セットアップ: 02-setup.md
+      - 2. コードベース Q&A: 03-codebase-qa.md
+  - 第2部 You are no longer a padawan:
+      - 3. 編集・ツール・ワークフロー: 04-editing-tools.md
+      - 4. Auto Mode と Computer Use: 05-auto-mode-computer-use.md
+  - 第3部 Extending Claude:
+      - 5. 拡張機構の全体像: 06-extension-mechanisms.md
+      - 6. Plugin Marketplace と Skills 活用: 07-plugin-marketplace.md
+  - 第4部 Scaling up:
+      - 7. チームで使う: 08-team-context.md
+  - 第5部 Leveling up:
+      - 8. Agent SDK: 09-agent-sdk.md
+      - 9. 並列・自律実行: 10-parallel-execution.md
+  - リファレンス:
+      - 10. キーバインド & スラッシュコマンド早見表: 11-keybindings-cheatsheet.md
+      - 11. 競合ツールとの使い分け: 12-competitors.md
+      - "12. まとめ 2026年版5段階ロードマップ": 13-summary.md
+  - 付録:
+      - A. タイムライン: appendix-a-timeline.md
+      - B. コマンド早見表: appendix-b-commands.md
+  - 最後に: 99-closing.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/chikatsubuse/claude-code-guide-ja
+  generator: false
+  # 最終更新日をフッタに表示
+  last_updated_hint: このサイトは週次で自動更新される。各章の frontmatter `last_updated` を参照。
+
+copyright: >
+  Boris Cherny "Mastering Claude Code in 30 minutes" (Code w/ Claude, 2025/5/22) を起点に
+  2026 年版へ改訂した日本語ガイド。コンテンツは CC BY 4.0、コードは MIT。

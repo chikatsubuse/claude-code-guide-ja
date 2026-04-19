@@ -1,6 +1,10 @@
 # 自動生成ファイル
 guide-all.md
 
+# MkDocs 生成物
+/site/
+/docs/
+
 # スクリプトが作る一時ファイル (コミット対象外)
 /tmp/
 *.tmp
