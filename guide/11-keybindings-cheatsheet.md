@@ -1,6 +1,6 @@
 ---
 title: "10. キーバインド & スラッシュコマンド早見表"
-last_updated: 2026-04-17
+last_updated: 2026-04-19
 chapter_id: 11-keybindings-cheatsheet
 ---
 
@@ -21,6 +21,8 @@ chapter_id: 11-keybindings-cheatsheet
 | `Ctrl + R` | 詳細出力 (verbose) 切替 | Claude が見ている全文を確認 |
 | `Ctrl + O` | 通常/詳細トランスクリプト切替 | 2026 年改修 |
 | `Ctrl + G` | 外部エディタで編集 | プロンプトを `$EDITOR` で編集 |
+| `Ctrl + A` | 複数行入力の行頭へ移動 | v2.1.113: readline 互換動作 |
+| `Ctrl + E` | 複数行入力の行末へ移動 | v2.1.113: readline 互換動作 |
 
 ### 10.2 スラッシュコマンド — セットアップ
 

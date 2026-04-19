@@ -1,6 +1,6 @@
 ---
 title: "4. Auto Mode と Computer Use: エージェント挙動の新常識"
-last_updated: 2026-04-17
+last_updated: 2026-04-19
 chapter_id: 05-auto-mode-computer-use
 ---
 
@@ -116,5 +116,19 @@ claude --computer-use
 - `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB=1` — サブプロセスから機密環境変数を除去
 - `CLAUDE_CODE_SCRIPT_CAPS=100` — セッション内のスクリプト実行回数上限
 - `CLAUDE_CODE_PERFORCE_MODE=1` — 読み取り専用ファイルへの書き込み失敗時に `p4 edit` ヒントを表示
+
+v2.1.113 で `sandbox.network.deniedDomains` オプションが追加された。`allowedDomains` のワイルドカードで許可されたドメインのうち、特定のドメインだけを除外ブロックするのに使う。
+
+```json
+// .claude/settings.json (例)
+{
+  "sandbox": {
+    "network": {
+      "allowedDomains": ["*.example.com"],
+      "deniedDomains": ["internal.example.com"]
+    }
+  }
+}
+```
 
 ---
