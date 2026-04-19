@@ -1,6 +1,6 @@
 ---
 title: "付録 A — タイムライン"
-last_updated: 2026-04-17
+last_updated: 2026-04-19
 chapter_id: appendix-a-timeline
 ---
 
@@ -29,5 +29,6 @@ chapter_id: appendix-a-timeline
 | 2026/4 | Haiku 4.5 登場 |
 | 2026/4/1 | Managed Agents パブリックベータ |
 | 2026/4/16 | **Opus 4.7** GA。`xhigh` effort level 追加 |
+| 2026/4/19 | **ネイティブバイナリ化** (v2.1.113): CLI が JS バンドルからネイティブ実行ファイルへ移行 |
 
 ---

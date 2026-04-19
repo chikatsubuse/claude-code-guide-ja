@@ -1,6 +1,6 @@
 ---
 title: "1. インストール・モデル選択・セットアップ"
-last_updated: 2026-04-17
+last_updated: 2026-04-19
 chapter_id: 02-setup
 ---
 
@@ -17,6 +17,8 @@ npm install -g @anthropic-ai/claude-code
 ```
 
 macOS / Linux はネイティブ、Windows は WSL2 または新しい PowerShell サポート経由で動作します。Homebrew (`brew install claude-code`) からもインストール可能です。
+
+v2.1.113 以降、CLI はプラットフォームごとのオプション依存としてパッケージされた**ネイティブバイナリ**を起動するようになった (従来は JavaScript バンドルを Node.js で実行する方式)。起動速度とメモリ効率が向上する。
 
 ### 1.2 認証
 
