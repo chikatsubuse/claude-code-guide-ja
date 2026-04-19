@@ -1,0 +1,240 @@
+name: Weekly Guide Update
+
+on:
+  schedule:
+    # 毎週月曜 00:00 UTC = 09:00 JST
+    - cron: "0 0 * * MON"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Run without creating a PR (just logs)"
+        required: false
+        type: boolean
+        default: false
+
+# Allow this workflow to create PRs
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: weekly-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Reflect this week's Claude Code changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ─────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed for git history operations
+
+      # ─────────────────────────────────────────────
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # ─────────────────────────────────────────────
+      - name: Set up Node.js (for Claude Code)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # ─────────────────────────────────────────────
+      - name: Install Claude Code
+        run: |
+          echo "==> Installing Claude Code"
+          curl -fsSL https://claude.ai/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.claude/local" >> "$GITHUB_PATH"
+
+      # ─────────────────────────────────────────────
+      - name: Verify Claude Code
+        run: |
+          claude --version || {
+            echo "Native install not found, falling back to npm"
+            npm install -g @anthropic-ai/claude-code
+            claude --version
+          }
+
+      # ─────────────────────────────────────────────
+      - name: Compute week identifier
+        id: week
+        run: |
+          WEEK=$(date -u +%G-W%V)
+          DATE=$(date -u +%Y-%m-%d)
+          echo "week=$WEEK" >> "$GITHUB_OUTPUT"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "==> Week: $WEEK, Date: $DATE"
+
+      # ─────────────────────────────────────────────
+      - name: Fetch CHANGELOG diff
+        id: changelog
+        run: |
+          bash scripts/fetch-changelog-diff.sh
+          {
+            echo "diff_file=/tmp/changelog-diff.md"
+            echo "diff_size=$(wc -c < /tmp/changelog-diff.md)"
+          } >> "$GITHUB_OUTPUT"
+
+      # ─────────────────────────────────────────────
+      - name: Fetch blog posts
+        id: blog
+        run: |
+          python3 scripts/fetch-blog-diff.py
+          {
+            echo "posts_file=/tmp/new-blog-posts.json"
+          } >> "$GITHUB_OUTPUT"
+
+      # ─────────────────────────────────────────────
+      - name: Short-circuit if nothing changed
+        id: gate
+        run: |
+          if grep -q "CHANGELOG に変更なし" /tmp/changelog-diff.md 2>/dev/null; then
+            CHANGELOG_EMPTY=true
+          else
+            CHANGELOG_EMPTY=false
+          fi
+          NEW_POSTS=$(python3 -c "import json; d=json.load(open('/tmp/new-blog-posts.json')); print(len(d.get('new_posts',[])))")
+          echo "changelog_empty=$CHANGELOG_EMPTY" >> "$GITHUB_OUTPUT"
+          echo "new_posts=$NEW_POSTS" >> "$GITHUB_OUTPUT"
+          if [[ "$CHANGELOG_EMPTY" == "true" && "$NEW_POSTS" == "0" ]]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "==> No updates this week. Exiting early."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # ─────────────────────────────────────────────
+      - name: Run weekly-update skill (Claude Code)
+        if: steps.gate.outputs.skip != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -e
+          echo "==> Running Claude Code with weekly-update skill"
+
+          # Construct the prompt that invokes the skill
+          PROMPT=$(cat <<'EOF'
+          @.claude/skills/weekly-update/SKILL.md を実行してください。
+
+          今日の日付: __TODAY__
+          今週の識別子: __WEEK__
+
+          入力ファイルは既に用意されています:
+          - /tmp/changelog-diff.md
+          - /tmp/new-blog-posts.json
+
+          状態ファイル:
+          - state/last-changelog-sha.txt
+          - state/last-changelog-version.txt
+          - state/last-blog-urls.json
+
+          CLAUDE.md の編集ルールに従って、最小 diff で反映してください。
+          完了したら /tmp/pr-description.md に PR 説明を書いてください。
+          EOF
+          )
+
+          PROMPT="${PROMPT//__TODAY__/${{ steps.week.outputs.date }}}"
+          PROMPT="${PROMPT//__WEEK__/${{ steps.week.outputs.week }}}"
+
+          # Run Claude Code in headless mode
+          claude -p --bare \
+            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(cat:*),Bash(python3:*),Bash(date:*),Bash(ls:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(grep:*)" \
+            --permission-mode acceptEdits \
+            --model sonnet \
+            --output-format stream-json \
+            --verbose \
+            "$PROMPT"
+
+      # ─────────────────────────────────────────────
+      - name: Rebuild guide-all.md
+        if: steps.gate.outputs.skip != 'true'
+        run: bash scripts/build-guide-all.sh
+
+      # ─────────────────────────────────────────────
+      - name: Detect changes
+        if: steps.gate.outputs.skip != 'true'
+        id: diff
+        run: |
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "==> No changes made by Claude Code. Skipping PR creation."
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            echo "==> Changed files:"
+            git status --short
+          fi
+
+      # ─────────────────────────────────────────────
+      - name: Prepare PR description
+        if: steps.gate.outputs.skip != 'true' && steps.diff.outputs.has_changes == 'true'
+        id: pr_body
+        run: |
+          if [[ -f /tmp/pr-description.md ]]; then
+            echo "==> Using Claude-written PR description"
+            cp /tmp/pr-description.md pr-body.md
+          else
+            echo "==> Generating minimal PR description"
+            {
+              echo "# Weekly Update: ${{ steps.week.outputs.week }}"
+              echo
+              echo "自動生成された週次更新 PR です。"
+              echo
+              echo "## 変更ファイル"
+              echo '```'
+              git status --short
+              echo '```'
+              echo
+              echo "---"
+              echo "- Date: ${{ steps.week.outputs.date }}"
+              echo "- Workflow: ${{ github.workflow }}"
+              echo "- Run: ${{ github.run_id }}"
+            } > pr-body.md
+          fi
+          echo "body_file=pr-body.md" >> "$GITHUB_OUTPUT"
+
+      # ─────────────────────────────────────────────
+      - name: Create Pull Request
+        if: steps.gate.outputs.skip != 'true' && steps.diff.outputs.has_changes == 'true' && inputs.dry_run != true
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Weekly update: ${{ steps.week.outputs.week }}"
+          title: "📅 Weekly Update: ${{ steps.week.outputs.week }}"
+          body-path: pr-body.md
+          branch: weekly-update/${{ steps.week.outputs.week }}
+          delete-branch: true
+          labels: |
+            weekly-update
+            auto-generated
+          draft: false
+          sign-commits: true
+
+      # ─────────────────────────────────────────────
+      - name: Dry-run summary
+        if: inputs.dry_run == true
+        run: |
+          echo "==> Dry run completed. No PR created."
+          echo "==> Changes detected:"
+          git status --short || true
+          if [[ -f pr-body.md ]]; then
+            echo "==> PR body would be:"
+            cat pr-body.md
+          fi
+
+      # ─────────────────────────────────────────────
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Weekly Update Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Week**: ${{ steps.week.outputs.week }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Date**: ${{ steps.week.outputs.date }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **CHANGELOG empty**: ${{ steps.gate.outputs.changelog_empty }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **New blog posts**: ${{ steps.gate.outputs.new_posts }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- **Has changes**: ${{ steps.diff.outputs.has_changes || 'n/a' }}" >> "$GITHUB_STEP_SUMMARY"

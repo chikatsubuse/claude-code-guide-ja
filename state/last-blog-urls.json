@@ -1,0 +1,12 @@
+{
+  "known_urls": [
+    "https://claude.com/ja-jp/blog/how-enterprises-are-building-ai-agents-in-2026",
+    "https://claude.com/ja-jp/blog/improving-frontend-design-through-skills",
+    "https://claude.com/ja-jp/blog/claude-code-on-the-web",
+    "https://claude.com/ja-jp/blog/claude-for-chrome",
+    "https://claude.com/ja-jp/blog/how-anthropic-teams-use-claude-code",
+    "https://claude.com/ja-jp/blog/max-plan"
+  ],
+  "last_checked": "2026-04-17T00:00:00Z",
+  "note": "These are the posts visible at the time of initial setup. New posts will be appended automatically."
+}
