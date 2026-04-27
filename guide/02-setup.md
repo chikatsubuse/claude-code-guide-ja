@@ -1,6 +1,6 @@
 ---
 title: "1. インストール・モデル選択・セットアップ"
-last_updated: 2026-04-19
+last_updated: 2026-04-27
 chapter_id: 02-setup
 ---
 
@@ -51,6 +51,8 @@ claude --model opus-4-7   # 起動時に指定
 
 `xhigh` は 2026/4/16 に登場した新レベルで、`high` と `max` の間に位置します。複雑なリファクタリングや長時間の自律タスクで効果を発揮します。
 
+v2.1.117 より、Pro/Max プランの Opus 4.6・Sonnet 4.6 のデフォルト effort が `medium` から `high` に変更された ([CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2-1-117))。
+
 ### 1.4 起動直後の初期設定 — 2026 年版
 
 講演当時の 6 項目に、この 1 年で登場した設定を加えた最新チェックリストです。
@@ -58,7 +60,7 @@ claude --model opus-4-7   # 起動時に指定
 | 項目 | コマンド | 効果 |
 |---|---|---|
 | ターミナル改行 | `/terminal-setup` | Shift+Enter で改行 |
-| テーマ | `/theme` | ライト/ダーク/Auto (ターミナル追従) |
+| テーマ | `/theme` | ライト/ダーク/Auto (ターミナル追従)。v2.1.118 以降は名前付きカスタムテーマの作成・切替も可能 |
 | GitHub 連携 | `/install-github-app` | Issue/PR で `@claude` メンション |
 | 通知 | `/config` → Notifications ON | 長時間タスクの完了通知 |
 | **Voice モード** | `/config` → Voice ON | 喋って指示 (20 言語対応) |
