@@ -1,6 +1,6 @@
 ---
 title: "6. Plugin Marketplace と Skills 活用"
-last_updated: 2026-04-17
+last_updated: 2026-04-27
 chapter_id: 07-plugin-marketplace
 ---
 
@@ -116,6 +116,14 @@ my-marketplace/
 ```
 
 でインストール可能になります。
+
+v2.1.118 では `claude plugin tag` コマンドが追加され、バージョン検証付きでリリース用 git タグを作成できるようになった ([CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2-1-118))。
+
+```bash
+claude plugin tag          # 現在の plugin.json のバージョンで git タグを作成
+```
+
+また v2.1.117 以降、`plugin install` で既にインストール済みのプラグインを指定すると、不足している依存関係を自動でインストールするようになった。v2.1.116 からは `/reload-plugins` と自動更新が、設定済みマーケットプレイスから不足依存関係を自動取得する。
 
 ### 6.7 Enterprise 向け: 社内専用マーケットプレイス
 

@@ -1,6 +1,6 @@
 ---
 title: "10. キーバインド & スラッシュコマンド早見表"
-last_updated: 2026-04-19
+last_updated: 2026-04-27
 chapter_id: 11-keybindings-cheatsheet
 ---
 
@@ -23,6 +23,8 @@ chapter_id: 11-keybindings-cheatsheet
 | `Ctrl + G` | 外部エディタで編集 | プロンプトを `$EDITOR` で編集 |
 | `Ctrl + A` | 複数行入力の行頭へ移動 | v2.1.113: readline 互換動作 |
 | `Ctrl + E` | 複数行入力の行末へ移動 | v2.1.113: readline 互換動作 |
+| `v` (Vim モード) | ビジュアル選択モード | v2.1.118: 選択・オペレータ対応 |
+| `V` (Vim モード) | ビジュアル行選択モード | v2.1.118: 行単位での選択 |
 
 ### 10.2 スラッシュコマンド — セットアップ
 
@@ -41,6 +43,7 @@ chapter_id: 11-keybindings-cheatsheet
 
 | コマンド | 効果 |
 |---|---|
+| `/usage` | トークン使用量・コスト確認 (v2.1.118: `/cost` と `/stats` を統合) |
 | `/memory` | メモリ階層一覧と編集 |
 | `/context` | 現在のコンテキスト使用量 |
 | `/compact` | 手動でコンテキスト圧縮 |
