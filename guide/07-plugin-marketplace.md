@@ -1,6 +1,6 @@
 ---
 title: "6. Plugin Marketplace と Skills 活用"
-last_updated: 2026-04-17
+last_updated: 2026-05-04
 chapter_id: 07-plugin-marketplace
 ---
 
@@ -27,6 +27,8 @@ Claude Code は起動時に **Anthropic 公式 Marketplace (`claude-plugins-offi
 - **Installed** — インストール済みの管理 (Enable/Disable/Uninstall)
 - **Marketplaces** — Marketplace の追加/削除
 - **Errors** — ロードエラーの確認
+
+孤立した依存関係 (他のプラグインが削除されて不要になった自動インストール済みパッケージ) を一括削除するには `claude plugin prune` を使う (v2.1.121 〜)。`plugin uninstall <name> --prune` でアンインストールと同時に依存の連鎖削除も可能。
 
 ### 6.3 サードパーティ Marketplace
 

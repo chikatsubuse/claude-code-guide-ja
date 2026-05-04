@@ -1,47 +1,50 @@
-# Weekly Update: 2026-W16 (後半)
+# Weekly Update: 2026-W19
 
 ## 概要
-- CHANGELOG: v2.1.111 → v2.1.114 (3 リリース: 2.1.112, 2.1.113, 2.1.114)
+- CHANGELOG: v2.1.114 → v2.1.126 (9 リリース: .116〜.126)
 - 新着ブログ: 0 本
-- ガイドへの反映: 4 ファイル (guide 3 章 + appendix-a)
+- ガイドへの反映: 6 ファイル
 
 ## 🔴 Breaking
-
 なし
 
 ## 🟠 Major
-
-- **CLI ネイティブバイナリ化** (v2.1.113): CLI がプラットフォームごとのネイティブバイナリを起動するアーキテクチャに変更。従来の JavaScript バンドル実行方式より起動速度・メモリ効率が向上。`guide/02-setup.md` §1.1 に追記。
+- **claude project purge** (v2.1.126): プロジェクト状態を一括削除。--dry-run/-y/--interactive/--all 付き
+- **claude ultrareview** (v2.1.120): CI から /ultrareview を非対話実行。--json で raw 出力
+- **MCP alwaysLoad** (v2.1.121): MCP サーバー設定に alwaysLoad:true でツールを常時ロード
+- **claude plugin prune** (v2.1.121): 孤立した自動インストール済み依存を一括削除
+- **PostToolUse で全ツール出力を置換** (v2.1.121): hookSpecificOutput.updatedToolOutput が全ツールに対応
+- **Vim visual mode** (v2.1.118): v/V でビジュアル選択、オペレータ適用可
+- **/usage 統合** (v2.1.118): /cost と /stats を /usage に統合。旧コマンドはショートカット継続
+- **カスタムテーマ作成** (v2.1.118): /theme で名前付きテーマ作成・切替・プラグイン配布
+- **Hooks から MCP ツール呼出** (v2.1.118): type:mcp_tool フックハンドラを追加
 
 ## 🟡 Minor
-
-- **`sandbox.network.deniedDomains`** (v2.1.113): `allowedDomains` ワイルドカードで許可されたドメインのうち特定ドメインだけをブロックする新設定。`guide/05-auto-mode-computer-use.md` §4.3 に設定例を追加。
-- **`Ctrl+A`/`Ctrl+E` キーバインド** (v2.1.113): 複数行入力で論理行の行頭/行末に移動 (readline 互換)。`guide/11-keybindings-cheatsheet.md` §10.1 に追加。
-
-## 🔵 Patch (ガイド反映なし)
-
-- v2.1.114: エージェントチームのパーミッションダイアログのクラッシュ修正
-- v2.1.113: セキュリティ強化多数 (macOS 危険パス判定、Bash deny ルールの exec ラッパー対応、`find -exec` 自動承認廃止)
-- v2.1.113: MCP 同時呼び出しのウォッチドッグタイムアウト修正
-- v2.1.112: Opus 4.7 "temporarily unavailable" エラー修正
+- デフォルト effort が high に変更 (v2.1.117): Pro/Max の Opus 4.6・Sonnet 4.6 が medium → high
+- CLAUDE_EFFORT プレースホルダ (v2.1.120): Skill 本文から現在の effort レベルを参照可
+- /skills 検索ボックス (v2.1.121): Skill 一覧をキーワードで絞り込み可
+- PostToolUse に duration_ms 追加 (v2.1.119): ツール実行時間をフック入力で取得可
+- ANTHROPIC_BEDROCK_SERVICE_TIER 環境変数 (v2.1.122): Bedrock サービスティア選択
+- claude auth login ターミナル貼り付け認証 (v2.1.126): WSL2/SSH/コンテナ対応
 
 ## 📝 ブログ
-
-新着なし (既知: 6 本)
+なし (今週は新着なし)
 
 ## 📖 変更ファイル
-
-- `guide/02-setup.md`: §1.1 末尾にネイティブバイナリ化の説明を追記
-- `guide/05-auto-mode-computer-use.md`: §4.3 末尾に `deniedDomains` 設定例を追記
-- `guide/11-keybindings-cheatsheet.md`: §10.1 表に `Ctrl+A`/`Ctrl+E` 行を追加
-- `guide/appendix-a-timeline.md`: v2.1.113 のネイティブバイナリ化エントリを追加
-- `state/weekly-summaries/2026-W16.md`: 週次サマリを更新
-- `state/last-changelog-sha.txt`: `HEAD~20` → `0385848b4e737831fc3b973d9a78d31950a87d9d`
-- `state/last-changelog-version.txt`: `2.1.111` → `2.1.114`
-- `state/last-blog-urls.json`: `last_checked` 日付を更新
+- `guide/02-setup.md`: §1.3 にデフォルト effort 変更の注記追加。§1.4 にカスタムテーマ説明を追加
+- `guide/06-extension-mechanisms.md`: §5.2/5.4/5.6 に新機能を追記
+- `guide/07-plugin-marketplace.md`: §6.2 に claude plugin prune を追記
+- `guide/11-keybindings-cheatsheet.md`: Vim visual mode / /usage / /ultrareview を追加
+- `guide/appendix-b-commands.md`: project purge / ultrareview / plugin prune / /usage を追加
+- `guide/appendix-a-timeline.md`: v2.1.118〜v2.1.126 の主要イベント 6 行を追加
+- `state/weekly-summaries/2026-W19.md`: 新規作成
+- `state/last-changelog-sha.txt`: 5bf19945... に更新
+- `state/last-changelog-version.txt`: 2.1.126 に更新
+- `state/last-blog-urls.json`: last_checked を更新
 
 ---
 レビューポイント:
-- [ ] CLI ネイティブバイナリ化を 🟠 Major と判定したが、ユーザー影響は透過的 (自動で切り替わる)。🟡 Minor への格下げが適切か確認してください
-- [ ] `sandbox.network.deniedDomains` の設定例 JSON は公式ドキュメントが整備され次第、リンクを追記することを推奨
-- [ ] v2.1.113 のセキュリティ強化 (Bash 権限周り) は詳細が多く、`guide/05-auto-mode-computer-use.md` や `guide/08-team-context.md` への追記が有益かもしれない (今回は Patch 扱いでスキップ)
+- [ ] デフォルト effort high 変更は Minor 扱いだが、ユーザへの影響が大きい場合は Major に格上げを検討
+- [ ] /cost・/stats はショートカットとして動作継続するが、案内文言の更新要否を確認
+- [ ] claude project purge は破壊的操作のため、README への警告追加が必要か確認
+- [ ] タイムラインの日付は推定値。正確なリリース日が判明した場合は修正を推奨

@@ -1,6 +1,6 @@
 ---
 title: "付録 A — タイムライン"
-last_updated: 2026-04-19
+last_updated: 2026-05-04
 chapter_id: appendix-a-timeline
 ---
 
@@ -30,5 +30,11 @@ chapter_id: appendix-a-timeline
 | 2026/4/1 | Managed Agents パブリックベータ |
 | 2026/4/16 | **Opus 4.7** GA。`xhigh` effort level 追加 |
 | 2026/4/19 | **ネイティブバイナリ化** (v2.1.113): CLI が JS バンドルからネイティブ実行ファイルへ移行 |
+| 2026/4/28 頃 | **Vim visual mode** (v2.1.118): `v`/`V` でテキスト選択・オペレータ適用 |
+| 2026/4/28 頃 | **カスタムテーマ & /usage** (v2.1.118): テーマ作成配布、/cost・/stats を統合 |
+| 2026/4/28 頃 | **MCP Tool hooks** (v2.1.118): `type:"mcp_tool"` で hooks から MCP ツール直接呼出 |
+| 2026/5/1 頃 | **claude ultrareview** (v2.1.120): CI 向け非対話コードレビューサブコマンド |
+| 2026/5/1 頃 | **MCP alwaysLoad / plugin prune** (v2.1.121): MCP 常時ロード・孤立依存削除 |
+| 2026/5/4 頃 | **claude project purge** (v2.1.126): プロジェクト状態 (履歴・タスク) 一括削除 |
 
 ---

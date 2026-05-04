@@ -1,6 +1,6 @@
 ---
 title: "10. キーバインド & スラッシュコマンド早見表"
-last_updated: 2026-04-19
+last_updated: 2026-05-04
 chapter_id: 11-keybindings-cheatsheet
 ---
 
@@ -23,6 +23,7 @@ chapter_id: 11-keybindings-cheatsheet
 | `Ctrl + G` | 外部エディタで編集 | プロンプトを `$EDITOR` で編集 |
 | `Ctrl + A` | 複数行入力の行頭へ移動 | v2.1.113: readline 互換動作 |
 | `Ctrl + E` | 複数行入力の行末へ移動 | v2.1.113: readline 互換動作 |
+| `v` / `V` | Vim visual / visual-line モード | Vim モード時。選択範囲にオペレータを適用可 (v2.1.118〜) |
 
 ### 10.2 スラッシュコマンド — セットアップ
 
@@ -43,6 +44,7 @@ chapter_id: 11-keybindings-cheatsheet
 |---|---|
 | `/memory` | メモリ階層一覧と編集 |
 | `/context` | 現在のコンテキスト使用量 |
+| `/usage` | コスト・トークン使用量 (旧 `/cost`, `/stats` を統合) (v2.1.118〜) |
 | `/compact` | 手動でコンテキスト圧縮 |
 | `/clear` | 履歴をクリア |
 | `/recap` | 離席明けにこれまでの要約を表示 |
@@ -66,6 +68,7 @@ chapter_id: 11-keybindings-cheatsheet
 | `/simplify` | コード簡素化 (組み込み Skill) |
 | `/debug` | 構造化デバッグ (組み込み Skill) |
 | `/powerup` | インタラクティブ機能チュートリアル |
+| `/ultrareview` | 高精度コードレビュー (v2.1.120〜) |
 
 ### 10.5 スラッシュコマンド — リモート・スケジュール
 
