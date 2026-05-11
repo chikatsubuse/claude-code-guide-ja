@@ -1,6 +1,6 @@
 ---
 title: "付録 B — コマンド早見表"
-last_updated: 2026-04-17
+last_updated: 2026-05-11
 chapter_id: appendix-b-commands
 ---
 
@@ -42,6 +42,9 @@ Ctrl+R                                           # 詳細出力切替
 /reload-plugins                                  # プラグインリロード
 /mcp                                             # MCP 管理
 claude mcp add <n> -- <command>               # MCP サーバー追加
+claude plugin prune                              # 孤立した依存プラグインを削除 (v2.1.121)
+claude plugin tag                                # プラグインのリリース Git タグを作成 (v2.1.118)
+claude --plugin-url <url>                        # URL から zip を取得してセッションで利用 (v2.1.129)
 
 # ─── 組み込み Skill ───────────────────────────
 /init                                            # CLAUDE.md 自動生成
@@ -59,6 +62,8 @@ claude --resume <session-id> --fork-session      # 履歴を分岐
 /schedule                                        # Cron 実行設定
 /remote-control                                  # スマホ/Web からの制御
 claude remote-control                            # 新規リモートセッション
+claude ultrareview [target]                      # 非対話型コードレビュー (CI 向け、v2.1.120)
+claude project purge [path]                      # プロジェクトの Claude Code 状態を全削除 (v2.1.126)
 
 # ─── Agent SDK (非対話モード) ─────────────────
 claude -p "<prompt>" --bare                      # 基本形 (高速起動)

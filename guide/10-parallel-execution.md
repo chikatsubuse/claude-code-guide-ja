@@ -1,6 +1,6 @@
 ---
 title: "9. 並列・自律実行"
-last_updated: 2026-04-17
+last_updated: 2026-05-11
 chapter_id: 10-parallel-execution
 ---
 
@@ -19,6 +19,17 @@ claude --worktree feature-auth --tmux   # tmux セッションで起動
 ```
 
 デスクトップアプリでは Code タブの worktree チェックボックスで有効化。
+
+v2.1.133 で `worktree.baseRef` 設定が追加された。`fresh` (デフォルト: `origin/<default-branch>` から分岐) と `head` (ローカル `HEAD` から分岐) を選べる。未プッシュのコミットを新しい worktree に引き継ぎたい場合は `head` を指定する:
+
+```json
+// ~/.claude/settings.json
+{
+  "worktree": {
+    "baseRef": "head"
+  }
+}
+```
 
 **非 Git VCS** (Mercurial / Perforce / SVN) 向けには、`WorktreeCreate` / `WorktreeRemove` フックを `settings.json` で定義すれば同じ分離が得られます。
 
@@ -105,6 +116,8 @@ Remote Control のバリエーション。メッセージアプリから Claude 
 ```
 
 `@claude-code` とメンションするだけで、通勤中でもスマホから長時間タスクを制御できます。
+
+v2.1.128 で `--channels` フラグがコンソール認証 (API キー) でも動作するようになった。コンソール組織で利用するには managed settings に `channelsEnabled: true` を設定する必要がある。
 
 ### 9.7 `/rewind` — 間違えたら巻き戻し
 

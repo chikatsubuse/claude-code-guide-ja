@@ -1,6 +1,6 @@
 ---
 title: "1. インストール・モデル選択・セットアップ"
-last_updated: 2026-04-19
+last_updated: 2026-05-11
 chapter_id: 02-setup
 ---
 
@@ -17,6 +17,8 @@ npm install -g @anthropic-ai/claude-code
 ```
 
 macOS / Linux はネイティブ、Windows は WSL2 または新しい PowerShell サポート経由で動作します。Homebrew (`brew install claude-code`) からもインストール可能です。
+
+v2.1.120 で Windows での Git for Windows (Git Bash) が必須でなくなった。Git Bash が存在しない場合は PowerShell がシェルツールとして自動的に使われる。
 
 v2.1.113 以降、CLI はプラットフォームごとのオプション依存としてパッケージされた**ネイティブバイナリ**を起動するようになった (従来は JavaScript バンドルを Node.js で実行する方式)。起動速度とメモリ効率が向上する。
 
@@ -51,6 +53,8 @@ claude --model opus-4-7   # 起動時に指定
 
 `xhigh` は 2026/4/16 に登場した新レベルで、`high` と `max` の間に位置します。複雑なリファクタリングや長時間の自律タスクで効果を発揮します。
 
+v2.1.117 で Pro/Max サブスクライバーの Opus 4.6 と Sonnet 4.6 のデフォルト effort が `medium` から `high` に引き上げられた。既存の挙動と変えたい場合は `/effort` または `CLAUDE_CODE_EFFORT_LEVEL` 環境変数で上書きできる。
+
 ### 1.4 起動直後の初期設定 — 2026 年版
 
 講演当時の 6 項目に、この 1 年で登場した設定を加えた最新チェックリストです。
@@ -58,7 +62,7 @@ claude --model opus-4-7   # 起動時に指定
 | 項目 | コマンド | 効果 |
 |---|---|---|
 | ターミナル改行 | `/terminal-setup` | Shift+Enter で改行 |
-| テーマ | `/theme` | ライト/ダーク/Auto (ターミナル追従) |
+| テーマ | `/theme` | ライト/ダーク/Auto (ターミナル追従) + カスタムテーマ作成 (v2.1.118) |
 | GitHub 連携 | `/install-github-app` | Issue/PR で `@claude` メンション |
 | 通知 | `/config` → Notifications ON | 長時間タスクの完了通知 |
 | **Voice モード** | `/config` → Voice ON | 喋って指示 (20 言語対応) |
@@ -67,6 +71,8 @@ claude --model opus-4-7   # 起動時に指定
 | **Output style** | `/config` → output style | Explanatory / Learning など教育モード |
 | 許可ツール | `/permissions` (旧 `/allowed-tools`) | ツール承認ルールをカスタマイズ |
 | Fullscreen | `/tui fullscreen` | ちらつきのない全画面レンダリング |
+
+v2.1.118 でカスタムテーマが正式サポートされた。`/theme` から作成・切替でき、`~/.claude/themes/` に JSON ファイルを手動配置しても適用できる。プラグインも `themes/` ディレクトリでテーマを配布できる。
 
 ### 1.5 音声入力 — Dictation からネイティブへ
 

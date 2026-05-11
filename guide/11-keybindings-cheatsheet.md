@@ -1,6 +1,6 @@
 ---
 title: "10. キーバインド & スラッシュコマンド早見表"
-last_updated: 2026-04-19
+last_updated: 2026-05-11
 chapter_id: 11-keybindings-cheatsheet
 ---
 
@@ -23,6 +23,8 @@ chapter_id: 11-keybindings-cheatsheet
 | `Ctrl + G` | 外部エディタで編集 | プロンプトを `$EDITOR` で編集 |
 | `Ctrl + A` | 複数行入力の行頭へ移動 | v2.1.113: readline 互換動作 |
 | `Ctrl + E` | 複数行入力の行末へ移動 | v2.1.113: readline 互換動作 |
+| `v` (vim モード) | ビジュアル選択モード開始 | v2.1.118: 範囲選択 + オペレータ操作 |
+| `V` (vim モード) | ビジュアル行選択モード開始 | v2.1.118: 行単位の選択 |
 
 ### 10.2 スラッシュコマンド — セットアップ
 
@@ -51,6 +53,7 @@ chapter_id: 11-keybindings-cheatsheet
 | `/rewind` | コード変更ごと巻き戻し |
 | `/focus` | Focus モード (最終結果のみ表示) |
 | `/tui fullscreen` | ちらつきなし全画面 |
+| `/usage` | コスト・使用量確認 (旧 `/cost`・`/stats` を統合、v2.1.118。両コマンドは引き続きショートカットとして利用可) |
 
 ### 10.4 スラッシュコマンド — 拡張
 
@@ -91,6 +94,7 @@ claude --add-dir PATH              # 追加作業ディレクトリ
 claude --model opus-4-7            # モデル指定
 claude --effort xhigh              # 推論深度指定
 claude remote-control              # 新規リモートセッション
+claude ultrareview [target]        # 非対話型コードレビュー (CI・スクリプト向け、v2.1.120)
 ```
 
 ---

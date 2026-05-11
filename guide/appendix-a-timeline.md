@@ -1,6 +1,6 @@
 ---
 title: "付録 A — タイムライン"
-last_updated: 2026-04-19
+last_updated: 2026-05-11
 chapter_id: appendix-a-timeline
 ---
 
@@ -30,5 +30,9 @@ chapter_id: appendix-a-timeline
 | 2026/4/1 | Managed Agents パブリックベータ |
 | 2026/4/16 | **Opus 4.7** GA。`xhigh` effort level 追加 |
 | 2026/4/19 | **ネイティブバイナリ化** (v2.1.113): CLI が JS バンドルからネイティブ実行ファイルへ移行 |
+| 2026/4下旬 | **vim visual mode** (v2.1.118): `v`/`V` でビジュアル選択。`/usage` が `/cost`・`/stats` を統合 |
+| 2026/4下旬 | **`claude ultrareview`** (v2.1.120): 非対話型コードレビュー CLI サブコマンド追加 |
+| 2026/5上旬 | **`worktree.baseRef`** (v2.1.133): Worktree 分岐元を `fresh`/`head` で設定可能に |
+| 2026/5上旬 | **`autoMode.hard_deny`** (v2.1.136): 無条件ブロックルールが Auto Mode に追加 |
 
 ---
