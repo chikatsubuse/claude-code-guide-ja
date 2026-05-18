@@ -1,6 +1,6 @@
 ---
 title: "7. チームで使う: コンテキスト共有の完全ガイド"
-last_updated: 2026-04-17
+last_updated: 2026-04-27
 chapter_id: 08-team-context
 ---
 
@@ -122,5 +122,7 @@ project-root/
 これに加えて 2026 年は:
 - `/less-permission-prompts` Skill: 過去の承認履歴から「よく通しているコマンド」を分析し、allow list 候補を提案
 - **Auto Mode** を併用すると、明示的ルール + AI 分類器の二重防御になる
+
+v2.1.118 より、Windows 環境の WSL 上で `wslInheritsWindowsSettings` ポリシーキーを設定すると、Windows 側の managed settings を WSL 内でも引き継げるようになった ([CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2-1-118))。また v2.1.117 で `blockedMarketplaces` と `strictKnownMarketplaces` のマネージド設定が、plugin install / update / refresh / autoupdate の全操作に適用されるよう強化された。
 
 ---
