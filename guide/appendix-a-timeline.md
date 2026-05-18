@@ -1,6 +1,6 @@
 ---
 title: "付録 A — タイムライン"
-last_updated: 2026-05-11
+last_updated: 2026-05-18
 chapter_id: appendix-a-timeline
 ---
 
@@ -40,5 +40,8 @@ chapter_id: appendix-a-timeline
 | 2026/5/4 頃 | **claude project purge** (v2.1.126): プロジェクト状態 (履歴・タスク) 一括削除 |
 | 2026/5上旬 | **`worktree.baseRef`** (v2.1.133): Worktree 分岐元を `fresh`/`head` で設定可能に |
 | 2026/5上旬 | **`autoMode.hard_deny`** (v2.1.136): 無条件ブロックルールが Auto Mode に追加 |
+| 2026/5中旬 | **Agent ビュー** (v2.1.139): `claude agents` で全セッション一覧管理 (プレビュー) |
+| 2026/5中旬 | **`/goal` コマンド** (v2.1.139): 完了条件を設定し Claude が自律継続実行 |
+| 2026/5中旬 | **Plugin 依存強制** (v2.1.143): `plugin disable/enable` に依存チェック追加 |
 
 ---

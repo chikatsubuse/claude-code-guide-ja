@@ -1,6 +1,6 @@
 ---
 title: "付録 B — コマンド早見表"
-last_updated: 2026-05-11
+last_updated: 2026-05-18
 chapter_id: appendix-b-commands
 ---
 
@@ -30,6 +30,7 @@ Ctrl+R                                           # 詳細出力切替
 /memory                                          # メモリ階層確認
 /context                                         # コンテキスト使用量
 /rewind                                          # コード変更ごと巻き戻し
+/goal                                            # 完了条件を設定して自律継続実行 (v2.1.139)
 
 # ─── モデルと深さ ─────────────────────────────
 /model                                           # モデル切替
@@ -41,6 +42,9 @@ Ctrl+R                                           # 詳細出力切替
 /plugin install <n>@<marketplace>             # プラグインインストール
 /plugin marketplace add <github-url>             # マーケットプレイス追加
 claude plugin prune                              # 孤立依存を一括削除 (v2.1.121〜)
+claude plugin details <name>                     # コンポーネント一覧・推定トークンコスト表示 (v2.1.139)
+claude plugin disable <name>                     # 依存チェック付き無効化 (v2.1.143)
+claude plugin enable <name>                      # 推移的依存を自動有効化 (v2.1.143)
 /reload-plugins                                  # プラグインリロード
 claude plugin tag                                # リリース用 git タグ作成 (v2.1.118)
 /mcp                                             # MCP 管理
@@ -58,6 +62,8 @@ claude ultrareview [target]                      # CI 向け非対話実行 (--j
 /powerup                                         # 対話チュートリアル
 
 # ─── 並列・自律実行 ───────────────────────────
+claude agents                                    # Agent ビュー: 全セッション一覧管理 (リサーチプレビュー、v2.1.139)
+claude agents --cwd <path>                       # 特定ディレクトリのセッションに絞り込む
 claude project purge [path]                      # プロジェクト状態を一括削除 (--dry-run / -y / --all) (v2.1.126〜)
 claude --worktree [NAME] [--tmux]                # Git worktree 分離
 claude --add-dir <path>                          # 別リポジトリを追加

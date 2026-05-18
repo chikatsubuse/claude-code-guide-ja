@@ -1,6 +1,6 @@
 ---
 title: "1. インストール・モデル選択・セットアップ"
-last_updated: 2026-05-11
+last_updated: 2026-05-18
 chapter_id: 02-setup
 ---
 
@@ -54,6 +54,8 @@ claude --model opus-4-7   # 起動時に指定
 `xhigh` は 2026/4/16 に登場した新レベルで、`high` と `max` の間に位置します。複雑なリファクタリングや長時間の自律タスクで効果を発揮します。
 
 v2.1.117 から、Pro/Max プランの **Opus 4.6・Sonnet 4.6** のデフォルト effort が `medium` から **`high`** に引き上げられた ([CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2-1-117))。応答が遅くなる場合は `/effort medium` で調整できる。
+
+v2.1.142 から、Fast モード (高速応答のため effort を抑えたモード) のデフォルトモデルが **Opus 4.6 から Opus 4.7** に変更された。以前の動作に戻したい場合は `CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1` 環境変数で Opus 4.6 に固定できる。
 
 ### 1.4 起動直後の初期設定 — 2026 年版
 
