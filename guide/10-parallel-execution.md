@@ -1,6 +1,6 @@
 ---
 title: "9. 並列・自律実行"
-last_updated: 2026-05-11
+last_updated: 2026-05-18
 chapter_id: 10-parallel-execution
 ---
 
@@ -27,6 +27,17 @@ v2.1.133 で `worktree.baseRef` 設定が追加された。`fresh` (デフォル
 {
   "worktree": {
     "baseRef": "head"
+  }
+}
+```
+
+v2.1.143 で `worktree.bgIsolation: "none"` 設定が追加された。git worktree が利用できないリポジトリで、バックグラウンドセッションが `EnterWorktree` を経由せずに作業ツリーを直接編集できるようになる:
+
+```json
+// ~/.claude/settings.json
+{
+  "worktree": {
+    "bgIsolation": "none"
   }
 }
 ```
@@ -139,5 +150,34 @@ Interactive にどこまで戻すかを選べます。Esc Esc の強化版で、
 | 上級 | Agent Teams (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`) | 独立パスが明確なマルチロール作業 |
 | 自動化 | Scheduled Tasks (`/schedule`) | 定期実行の自律タスク |
 | リモート | Remote Control / Channels | 長時間タスクのモバイル監視 |
+| 管理 | Agent ビュー (`claude agents`) | 全セッションの一覧・監視・操作 |
+
+### 9.9 Agent ビュー — 全セッションを一画面で管理 (v2.1.139〜) **(リサーチプレビュー)**
+
+`claude agents` コマンドで起動する **Agent ビュー** は、実行中・入力待ち・完了済みのすべての Claude Code セッションを一覧表示する管理ダッシュボードである。
+
+```bash
+claude agents                             # Agent ビューを開く
+claude agents --cwd <path>                # 特定ディレクトリのセッションに絞り込む
+```
+
+主な操作:
+- `Enter` でセッションにアタッチ、`←` でデタッチ
+- `v` でトランスクリプトをエディタで確認
+- セッションに直接プロンプトを送信
+
+**バックグラウンドセッションの起動オプション** (v2.1.142〜): `claude agents` 起動時に以下のフラグで、そこから派生するバックグラウンドセッションのデフォルト設定を指定できる:
+
+```bash
+claude agents \
+  --model opus-4-7 \
+  --effort xhigh \
+  --permission-mode auto \
+  --add-dir ../shared \
+  --settings ./team.json \
+  --mcp-config ./mcp.json
+```
+
+詳細は [公式ドキュメント](https://code.claude.com/docs/en/agent-view) (英語ドキュメント) を参照。
 
 ---

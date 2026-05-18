@@ -1,6 +1,6 @@
 ---
 title: "10. キーバインド & スラッシュコマンド早見表"
-last_updated: 2026-05-11
+last_updated: 2026-05-18
 chapter_id: 11-keybindings-cheatsheet
 ---
 
@@ -38,6 +38,7 @@ chapter_id: 11-keybindings-cheatsheet
 | `/login` | claude.ai 認証 |
 | `/model` | モデル切替 (途中変更は警告あり) |
 | `/effort` | Opus 4.7 の深さ調整 (low/medium/high/xhigh/max) |
+| `/scroll-speed` | マウスホイールのスクロール速度調整 (ライブプレビュー付き、v2.1.139) |
 
 ### 10.3 スラッシュコマンド — 作業中
 
@@ -52,6 +53,7 @@ chapter_id: 11-keybindings-cheatsheet
 | `/resume` | 過去セッション再開 |
 | `/branch` | 現セッションから枝分かれ |
 | `/rewind` | コード変更ごと巻き戻し |
+| `/goal` | 完了条件を設定し、達成まで Claude が自律継続実行 (v2.1.139) |
 | `/focus` | Focus モード (最終結果のみ表示) |
 | `/tui fullscreen` | ちらつきなし全画面 |
 | `/usage` | コスト・使用量確認 (旧 `/cost`・`/stats` を統合、v2.1.118。両コマンドは引き続きショートカットとして利用可) |
@@ -97,6 +99,8 @@ claude --model opus-4-7            # モデル指定
 claude --effort xhigh              # 推論深度指定
 claude remote-control              # 新規リモートセッション
 claude ultrareview [target]        # 非対話型コードレビュー (CI・スクリプト向け、v2.1.120)
+claude agents                      # Agent ビュー: 全セッション一覧 (リサーチプレビュー、v2.1.139)
+claude agents --cwd <path>         # 特定ディレクトリのセッションに絞り込む
 ```
 
 ---
