@@ -1,6 +1,6 @@
 ---
 title: "5. 拡張機構の全体像: Skills / Subagents / Agent Teams / Plugins / Hooks / MCP"
-last_updated: 2026-04-17
+last_updated: 2026-04-27
 chapter_id: 06-extension-mechanisms
 ---
 
@@ -163,6 +163,10 @@ release         → リリースノート + デプロイ
 
 **Anthropic 公式によれば、マルチエージェントワークフローは単一エージェントの 4〜7 倍のトークンを消費**。Agent Teams (複数セッション版) は約 15 倍。ただし 2026 年現在はプロンプトキャッシュ読み取りが $0.50/MTok (Opus) と安いので、体感コストはそれほど爆発的ではありません。Pro プランで 5 並列を探索ブン回すと 20 分でレート制限にぶつかるので注意。
 
+#### `--agent` でメインスレッド実行時のフロントマター対応
+
+v2.1.116 以降、agent フロントマターの `hooks:` セクションは `--agent <name>` でメインスレッドとして起動した場合にも発火する。v2.1.117 では同じく `mcpServers:` のロードもサポートされ、サブエージェント専用だった設定がメインスレッドエージェントでも完全に機能するようになった ([CHANGELOG v2.1.117](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2-1-117))。
+
 ### 5.4 Hooks — 12 のライフサイクルイベント
 
 **2026 年初頭に登場した新機構**。Claude Code のエージェントループの「ここ」「そこ」で任意のシェルコマンド/HTTP エンドポイント/LLM プロンプトを実行できます。
@@ -203,13 +207,16 @@ release         → リリースノート + デプロイ
 
 Claude がファイルを編集するたびにテストが走り、出力が次のターンのコンテキストに戻る。「壊した → 直す」のループが人間なしで回り始めます。
 
-#### Hook ハンドラの 3 種類
+#### Hook ハンドラの 4 種類
 
 - **Command hook** (`type: "command"`): シェルコマンド実行。JSON を stdin で受け、終了コードで結果を返す
 - **Prompt hook** (`type: "prompt"`): Claude モデルに単発評価させる。`$ARGUMENTS` プレースホルダ
 - **Agent hook** (`type: "agent"`): サブエージェントを起動して検証 (Read/Grep/Glob アクセス可)
+- **MCP Tool hook** (`type: "mcp_tool"`): MCP ツールを直接呼び出す (v2.1.118)
 
-この三段階により、「軽量チェック」「セマンティック評価」「深い分析」を使い分けられます。
+この四段階により、「軽量チェック」「セマンティック評価」「深い分析」「外部ツール連携」を使い分けられます。
+
+v2.1.119 より、`PostToolUse` および `PostToolUseFailure` のフック入力に `duration_ms` (ツール実行時間。パーミッションプロンプトと PreToolUse フック時間は除く) が追加された。ツールのパフォーマンス計測に使える。
 
 #### PreToolUse で危険コマンドを完全ブロック
 

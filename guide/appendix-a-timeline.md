@@ -1,6 +1,6 @@
 ---
 title: "付録 A — タイムライン"
-last_updated: 2026-04-19
+last_updated: 2026-04-27
 chapter_id: appendix-a-timeline
 ---
 
@@ -30,5 +30,10 @@ chapter_id: appendix-a-timeline
 | 2026/4/1 | Managed Agents パブリックベータ |
 | 2026/4/16 | **Opus 4.7** GA。`xhigh` effort level 追加 |
 | 2026/4/19 | **ネイティブバイナリ化** (v2.1.113): CLI が JS バンドルからネイティブ実行ファイルへ移行 |
+| 2026/4下旬 | **デフォルト effort `high`** (v2.1.117): Pro/Max の Opus 4.6・Sonnet 4.6 で effort デフォルトが high に |
+| 2026/4下旬 | **Vim ビジュアルモード** (v2.1.118): `v`/`V` でテキスト・行選択が可能に |
+| 2026/4下旬 | **/usage 統合** (v2.1.118): `/cost`・`/stats` を `/usage` に集約 |
+| 2026/4下旬 | **Hooks から MCP ツール呼び出し** (v2.1.118): `type: "mcp_tool"` ハンドラ追加 |
+| 2026/4下旬 | **カスタムテーマ対応** (v2.1.118): `/theme` から名前付きテーマ作成・切替 |
 
 ---
