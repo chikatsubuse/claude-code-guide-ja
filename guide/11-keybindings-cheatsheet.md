@@ -1,6 +1,6 @@
 ---
 title: "10. キーバインド & スラッシュコマンド早見表"
-last_updated: 2026-04-27
+last_updated: 2026-05-04
 chapter_id: 11-keybindings-cheatsheet
 ---
 
@@ -69,6 +69,7 @@ chapter_id: 11-keybindings-cheatsheet
 | `/simplify` | コード簡素化 (組み込み Skill) |
 | `/debug` | 構造化デバッグ (組み込み Skill) |
 | `/powerup` | インタラクティブ機能チュートリアル |
+| `/ultrareview` | 高精度コードレビュー (v2.1.120〜) |
 
 ### 10.5 スラッシュコマンド — リモート・スケジュール
 

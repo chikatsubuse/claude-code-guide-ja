@@ -1,6 +1,6 @@
 ---
 title: "付録 A — タイムライン"
-last_updated: 2026-04-27
+last_updated: 2026-05-04
 chapter_id: appendix-a-timeline
 ---
 
@@ -35,5 +35,8 @@ chapter_id: appendix-a-timeline
 | 2026/4下旬 | **/usage 統合** (v2.1.118): `/cost`・`/stats` を `/usage` に集約 |
 | 2026/4下旬 | **Hooks から MCP ツール呼び出し** (v2.1.118): `type: "mcp_tool"` ハンドラ追加 |
 | 2026/4下旬 | **カスタムテーマ対応** (v2.1.118): `/theme` から名前付きテーマ作成・切替 |
+| 2026/5/1 頃 | **claude ultrareview** (v2.1.120): CI 向け非対話コードレビューサブコマンド |
+| 2026/5/1 頃 | **MCP alwaysLoad / plugin prune** (v2.1.121): MCP 常時ロード・孤立依存削除 |
+| 2026/5/4 頃 | **claude project purge** (v2.1.126): プロジェクト状態 (履歴・タスク) 一括削除 |
 
 ---

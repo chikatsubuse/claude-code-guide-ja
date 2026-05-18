@@ -1,6 +1,6 @@
 ---
 title: "付録 B — コマンド早見表"
-last_updated: 2026-04-27
+last_updated: 2026-05-04
 chapter_id: appendix-b-commands
 ---
 
@@ -40,6 +40,7 @@ Ctrl+R                                           # 詳細出力切替
 /plugin                                          # Plugin Marketplace UI
 /plugin install <n>@<marketplace>             # プラグインインストール
 /plugin marketplace add <github-url>             # マーケットプレイス追加
+claude plugin prune                              # 孤立依存を一括削除 (v2.1.121〜)
 /reload-plugins                                  # プラグインリロード
 claude plugin tag                                # リリース用 git タグ作成 (v2.1.118)
 /mcp                                             # MCP 管理
@@ -50,10 +51,13 @@ claude mcp add <n> -- <command>               # MCP サーバー追加
 /review                                          # コードレビュー
 /security-review                                 # セキュリティレビュー
 /simplify                                        # コード簡素化
+/ultrareview                                     # 高精度コードレビュー (v2.1.120〜)
+claude ultrareview [target]                      # CI 向け非対話実行 (--json で raw 出力)
 /debug                                           # 構造化デバッグ
 /powerup                                         # 対話チュートリアル
 
 # ─── 並列・自律実行 ───────────────────────────
+claude project purge [path]                      # プロジェクト状態を一括削除 (--dry-run / -y / --all) (v2.1.126〜)
 claude --worktree [NAME] [--tmux]                # Git worktree 分離
 claude --add-dir <path>                          # 別リポジトリを追加
 /branch                                          # セッションを枝分かれ

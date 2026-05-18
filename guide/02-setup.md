@@ -1,6 +1,6 @@
 ---
 title: "1. インストール・モデル選択・セットアップ"
-last_updated: 2026-04-27
+last_updated: 2026-05-04
 chapter_id: 02-setup
 ---
 
@@ -51,7 +51,7 @@ claude --model opus-4-7   # 起動時に指定
 
 `xhigh` は 2026/4/16 に登場した新レベルで、`high` と `max` の間に位置します。複雑なリファクタリングや長時間の自律タスクで効果を発揮します。
 
-v2.1.117 より、Pro/Max プランの Opus 4.6・Sonnet 4.6 のデフォルト effort が `medium` から `high` に変更された ([CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2-1-117))。
+v2.1.117 から、Pro/Max プランの **Opus 4.6・Sonnet 4.6** のデフォルト effort が `medium` から **`high`** に引き上げられた ([CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md#2-1-117))。応答が遅くなる場合は `/effort medium` で調整できる。
 
 ### 1.4 起動直後の初期設定 — 2026 年版
 
@@ -69,6 +69,8 @@ v2.1.117 より、Pro/Max プランの Opus 4.6・Sonnet 4.6 のデフォルト 
 | **Output style** | `/config` → output style | Explanatory / Learning など教育モード |
 | 許可ツール | `/permissions` (旧 `/allowed-tools`) | ツール承認ルールをカスタマイズ |
 | Fullscreen | `/tui fullscreen` | ちらつきのない全画面レンダリング |
+
+v2.1.118 から、`/theme` でカスタムテーマの**作成・命名・切替**が可能になった。`~/.claude/themes/` に JSON ファイルを手書きするか、`/theme` から対話的に作成できる。プラグインが `themes/` ディレクトリを同梱することでチームへの配布も可能。
 
 ### 1.5 音声入力 — Dictation からネイティブへ
 
