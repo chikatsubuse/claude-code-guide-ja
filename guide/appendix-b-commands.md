@@ -1,6 +1,6 @@
 ---
 title: "付録 B — コマンド早見表"
-last_updated: 2026-05-04
+last_updated: 2026-05-11
 chapter_id: appendix-b-commands
 ---
 
@@ -45,6 +45,7 @@ claude plugin prune                              # 孤立依存を一括削除 (
 claude plugin tag                                # リリース用 git タグ作成 (v2.1.118)
 /mcp                                             # MCP 管理
 claude mcp add <n> -- <command>               # MCP サーバー追加
+claude --plugin-url <url>                        # URL から zip を取得してセッションで利用 (v2.1.129)
 
 # ─── 組み込み Skill ───────────────────────────
 /init                                            # CLAUDE.md 自動生成

@@ -1,6 +1,6 @@
 ---
 title: "6. Plugin Marketplace と Skills 活用"
-last_updated: 2026-05-04
+last_updated: 2026-05-11
 chapter_id: 07-plugin-marketplace
 ---
 
@@ -20,6 +20,13 @@ Claude Code は起動時に **Anthropic 公式 Marketplace (`claude-plugins-offi
 /plugin                        # マーケットプレイス UI を開く
 /plugin install github@claude-plugins-official
 /plugin install playwright@claude-plugins-official
+```
+
+v2.1.128 で `--plugin-dir` が `.zip` アーカイブを受け入れるようになった。v2.1.129 では URL から直接フェッチする `--plugin-url` フラグが追加された:
+
+```bash
+claude --plugin-dir ./my-plugin.zip            # ローカル zip から読み込み
+claude --plugin-url https://example.com/p.zip  # URL から取得 (現セッションのみ)
 ```
 
 `/plugin` を開くと 4 タブ:
@@ -136,5 +143,14 @@ claude plugin tag          # 現在の plugin.json のバージョンで git タ
 ```
 
 管理者は特定チームへの auto-install やアクセス制御を設定可能。これは Cowork で 2026 年 2 月に導入された機能で、社内ツール統合の大きな障壁を取り除きました。
+
+### 6.8 Plugin 管理コマンド (2026 年追加)
+
+| コマンド | 効果 |
+|---|---|
+| `claude plugin prune` | 孤立した依存プラグインを削除。`plugin uninstall --prune` と組み合わせると依存を芋づる削除 (v2.1.121) |
+| `claude plugin tag` | プラグインのリリース Git タグをバージョン検証付きで作成 (v2.1.118) |
+| `claude --plugin-url <url>` | URL から `.zip` を取得して現セッションで利用 (v2.1.129) |
+| `claude --plugin-dir <path>` | ディレクトリまたは `.zip` アーカイブを指定 (v2.1.128 で zip 対応) |
 
 ---

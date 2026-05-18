@@ -1,6 +1,6 @@
 ---
 title: "付録 A — タイムライン"
-last_updated: 2026-05-04
+last_updated: 2026-05-11
 chapter_id: appendix-a-timeline
 ---
 
@@ -38,5 +38,7 @@ chapter_id: appendix-a-timeline
 | 2026/5/1 頃 | **claude ultrareview** (v2.1.120): CI 向け非対話コードレビューサブコマンド |
 | 2026/5/1 頃 | **MCP alwaysLoad / plugin prune** (v2.1.121): MCP 常時ロード・孤立依存削除 |
 | 2026/5/4 頃 | **claude project purge** (v2.1.126): プロジェクト状態 (履歴・タスク) 一括削除 |
+| 2026/5上旬 | **`worktree.baseRef`** (v2.1.133): Worktree 分岐元を `fresh`/`head` で設定可能に |
+| 2026/5上旬 | **`autoMode.hard_deny`** (v2.1.136): 無条件ブロックルールが Auto Mode に追加 |
 
 ---
