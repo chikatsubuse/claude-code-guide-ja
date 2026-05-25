@@ -1,6 +1,6 @@
 ---
 title: "10. キーバインド & スラッシュコマンド早見表"
-last_updated: 2026-05-11
+last_updated: 2026-05-25
 chapter_id: 11-keybindings-cheatsheet
 ---
 
@@ -36,14 +36,14 @@ chapter_id: 11-keybindings-cheatsheet
 | `/config` | 設定画面 (通知, Voice, Auto Mode, Output Style, Remote Control) |
 | `/permissions` | 権限ルール編集 (旧 `/allowed-tools`) |
 | `/login` | claude.ai 認証 |
-| `/model` | モデル切替 (途中変更は警告あり) |
+| `/model` | モデル切替 (v2.1.144〜: 現セッションのみ。model picker 内で `d` を押すとデフォルト変更) |
 | `/effort` | Opus 4.7 の深さ調整 (low/medium/high/xhigh/max) |
 
 ### 10.3 スラッシュコマンド — 作業中
 
 | コマンド | 効果 |
 |---|---|
-| `/usage` | トークン使用量・コスト確認 (v2.1.118: `/cost` と `/stats` を統合) |
+| `/usage` | トークン使用量・コスト確認 (v2.1.118: `/cost` と `/stats` を統合。v2.1.149: skills/subagents/plugins/MCP サーバー別内訳を表示) |
 | `/memory` | メモリ階層一覧と編集 |
 | `/context` | 現在のコンテキスト使用量 |
 | `/compact` | 手動でコンテキスト圧縮 |
@@ -54,7 +54,7 @@ chapter_id: 11-keybindings-cheatsheet
 | `/rewind` | コード変更ごと巻き戻し |
 | `/focus` | Focus モード (最終結果のみ表示) |
 | `/tui fullscreen` | ちらつきなし全画面 |
-| `/usage` | コスト・使用量確認 (旧 `/cost`・`/stats` を統合、v2.1.118。両コマンドは引き続きショートカットとして利用可) |
+| `/usage-credits` | 追加使用量クレジット確認 (v2.1.144: 旧 `/extra-usage` から改称。旧名も使用可) |
 
 ### 10.4 スラッシュコマンド — 拡張
 
@@ -67,10 +67,11 @@ chapter_id: 11-keybindings-cheatsheet
 | `/init` | 新規プロジェクトに CLAUDE.md 初期作成 |
 | `/review` | Claude に PR/コードレビューさせる |
 | `/security-review` | セキュリティレビュー (組み込み Skill) |
-| `/simplify` | コード簡素化 (組み込み Skill) |
+| `/code-review` | コードレビュー・バグ検出 (v2.1.147: 旧 `/simplify` から改称。`/code-review high` で深さ指定、`--comment` で GitHub PR インラインコメント) |
 | `/debug` | 構造化デバッグ (組み込み Skill) |
 | `/powerup` | インタラクティブ機能チュートリアル |
 | `/ultrareview` | 高精度コードレビュー (v2.1.120〜) |
+| `/goal` | 完了条件を設定し達成まで Claude が自律継続 (v2.1.139〜) |
 
 ### 10.5 スラッシュコマンド — リモート・スケジュール
 
