@@ -1,63 +1,52 @@
-# Weekly Update: 2026-W20
+# Weekly Update: 2026-W22
 
 ## 概要
-- CHANGELOG: v2.1.114 → v2.1.138 (17 リリース)
+- CHANGELOG: v2.1.138 → v2.1.150 (11 リリース)
 - 新着ブログ: 0 本
-- ガイドへの反映: 8 ファイル
+- ガイドへの反映: 7 ファイル (guide 6 章 + README)
 
 ## 🔴 Breaking
 
-なし
+- **`/simplify` → `/code-review`** (v2.1.147): コマンドが改称され、旧 cleanup-and-fix 動作は廃止。新コマンドは effort 指定・`--comment` フラグで GitHub PR インラインコメント投稿に対応
+- **`/model` が現セッション限定に変更** (v2.1.144): デフォルトモデルの変更は model picker 内の `d` キーで行う
 
 ## 🟠 Major
 
-- **`autoMode.hard_deny`** (v2.1.136): Auto Mode の無条件ブロックルール。`soft_deny` と違いユーザー許可でも通らない → `guide/05-auto-mode-computer-use.md`
-- **`worktree.baseRef`** (v2.1.133): worktree の分岐元を `fresh`(origin) / `head`(ローカル HEAD) で選択可 → `guide/10-parallel-execution.md`
-- **Hooks で effort level 参照** (v2.1.133): `effort.level` / `$CLAUDE_EFFORT` が Hooks と Bash ツール内で使用可能に → `guide/06-extension-mechanisms.md`
-- **MCP Tool hook** (v2.1.118): `type: "mcp_tool"` で Hook から MCP ツールを直接呼び出せるように → `guide/06-extension-mechanisms.md`
-- **PostToolUse 全ツール対応** (v2.1.121): `hookSpecificOutput.updatedToolOutput` が全ツールで使用可能に (従来は MCP のみ) → `guide/06-extension-mechanisms.md`
-- **`alwaysLoad` MCP オプション** (v2.1.121): MCP ツールを tool-search の遅延なく常時ロード → `guide/06-extension-mechanisms.md`
-- **`--plugin-url <url>`** (v2.1.129): URL から plugin .zip を直接フェッチ → `guide/07-plugin-marketplace.md`
-- **`--plugin-dir` が .zip 対応** (v2.1.128): zip アーカイブを直接渡せるように → `guide/07-plugin-marketplace.md`
-- **`claude plugin prune`** (v2.1.121): 孤立した依存プラグインを削除 → `guide/07-plugin-marketplace.md`
-- **vim visual mode** (v2.1.118): `v`/`V` でビジュアル選択・行選択モード → `guide/11-keybindings-cheatsheet.md`
-- **`/usage` 統合** (v2.1.118): `/cost` + `/stats` → `/usage` に統合 (旧コマンドはショートカットで継続) → `guide/11-keybindings-cheatsheet.md`
-- **カスタムテーマ** (v2.1.118): `/theme` でカスタムテーマ作成・切替が正式対応 → `guide/02-setup.md`
-- **デフォルト effort が `high` に** (v2.1.117): Pro/Max の Opus 4.6・Sonnet 4.6 のデフォルトが `medium` → `high` → `guide/02-setup.md`
-- **`claude ultrareview [target]`** (v2.1.120): `/ultrareview` の非対話 CI 向けサブコマンド → `guide/11-keybindings-cheatsheet.md`, `guide/appendix-b-commands.md`
-- **`--channels` コンソール認証対応** (v2.1.128): API キー認証でも `--channels` が使用可能に → `guide/10-parallel-execution.md`
+- **`claude agents` Agent View** (v2.1.139, Research Preview): 全セッション一覧 UI。`--json` でスクリプト向け出力、`--cwd` で絞り込み、Ctrl+T でピン留め
+- **`/goal` コマンド** (v2.1.139): 完了条件を設定し達成まで自律継続
+- **`claude plugin details <name>`** (v2.1.139): コンポーネント一覧と推定トークンコストを確認
+- **Hook exec form / `continueOnBlock`** (v2.1.139): `args: string[]` でシェル不使用の直接起動、`continueOnBlock: true` でブロック後もターン継続
+- **`terminalSequence` hook フィールド** (v2.1.141): ヘッドレス環境でのデスクトップ通知対応
+- **プラグイン依存管理強制** (v2.1.143): disable/enable が依存関係を強制
+- **`/resume` background sessions 対応** (v2.1.144): `claude --bg` セッションも再開可
 
 ## 🟡 Minor
 
-- Windows: Git for Windows 不要になった (PowerShell にフォールバック, v2.1.120)
-- `${CLAUDE_EFFORT}` プレースホルダー: Skill 本文から effort 参照可 (v2.1.120)
-- `claude plugin tag`: リリース Git タグ作成コマンド (v2.1.118)
-- `sandbox.bwrapPath`/`socatPath`: Linux/WSL での管理者向け設定 (v2.1.133)
-- `claude project purge [path]`: プロジェクト状態の全削除 `--dry-run` 対応 (v2.1.126)
+- `/usage` per-category 内訳 (v2.1.149): skills/subagents/plugins/MCP 別コスト表示
+- `worktree.bgIsolation: "none"` (v2.1.143): EnterWorktree なしで作業コピーを直接編集
+- Rewind "Summarize up to here" (v2.1.141): 古い会話のみ圧縮
+- Stop/SubagentStop フックに `background_tasks`/`session_crons` フィールド追加 (v2.1.145)
+- root-level `SKILL.md` が Skill として認識 (v2.1.142)
 
 ## 📝 ブログ
 
-新着なし
+今週の新着なし
 
 ## 📖 変更ファイル
 
-- `guide/02-setup.md`: Windows Git for Windows 不要化、デフォルト effort `high`、カスタムテーマ対応
-- `guide/05-auto-mode-computer-use.md`: `autoMode.hard_deny` セクション追加、`sandbox.bwrapPath`/`socatPath` 追記
-- `guide/06-extension-mechanisms.md`: MCP tool hook type、PostToolUse 全ツール対応、effort in hooks、`alwaysLoad`、`${CLAUDE_EFFORT}`
-- `guide/07-plugin-marketplace.md`: `--plugin-url`/`.zip` 対応、§6.8 管理コマンド表追加
-- `guide/10-parallel-execution.md`: `worktree.baseRef` 設定、`--channels` コンソール認証対応
-- `guide/11-keybindings-cheatsheet.md`: vim visual mode (`v`/`V`)、`/usage` 統合、`claude ultrareview`
-- `guide/appendix-a-timeline.md`: 4 行追加 (v2.1.118〜v2.1.136)
-- `guide/appendix-b-commands.md`: `claude ultrareview`、`claude project purge`、`claude plugin prune`、`claude plugin tag`、`claude --plugin-url` 追加
-- `state/weekly-summaries/2026-W20.md`: 新規作成
-- `state/last-changelog-sha.txt`: `0385848b` → `831608a3` に更新
-- `state/last-changelog-version.txt`: `2.1.114` → `2.1.138` に更新
-- `state/last-blog-urls.json`: `last_checked` を 2026-05-11 に更新
+- `README.md`: ⚠️ 今週の重要な変更セクションを追加
+- `guide/10-parallel-execution.md`: 9.9 Agent View 節新設、9.1 worktree.bgIsolation、9.7 Rewind 追記、9.8 表更新
+- `guide/06-extension-mechanisms.md`: Hook exec form/continueOnBlock/terminalSequence/Stop フィールド追記、/simplify→/code-review 更新
+- `guide/07-plugin-marketplace.md`: plugin dependency enforcement、plugin details、root-level SKILL.md、projected cost 追記
+- `guide/11-keybindings-cheatsheet.md`: /model、/code-review、/goal、/usage 更新
+- `guide/appendix-b-commands.md`: /code-review、/goal、claude plugin details、claude agents 追加
+- `guide/appendix-a-timeline.md`: v2.1.139〜v2.1.147 の 8 行追加
+- `state/weekly-summaries/2026-W22.md`: 新規作成
+- `state/last-changelog-sha.txt`, `state/last-changelog-version.txt`, `state/last-blog-urls.json`: 状態更新
 
 ---
-
 レビューポイント:
-- [ ] **デフォルト effort `high` への引き上げ** (v2.1.117): Opus 4.6/Sonnet 4.6 でのコスト増加についてユーザーへの注意喚起が必要か確認
-- [ ] **`worktree.baseRef` の挙動変更**: v2.1.128 で local HEAD に変更 → v2.1.133 で origin に戻す。既存ユーザーへの影響として破壊的変更として扱うべきか確認
-- [ ] `claude ultrareview` の反映先が `11-keybindings-cheatsheet.md` §10.6 で適切か (専用の節を設けるほどの機能か)
-- [ ] `claude project purge` はガイドの別の章 (例: team-context や setup) にも言及すべきか
+- [ ] `/model` のセッション限定変更は 🔴 Breaking か 🟠 Major か (旧ドキュメントでは「途中変更は警告あり」としか書いておらず、デフォルト永続化の挙動は未記述のため Major 扱いでもよいかもしれない)
+- [ ] `claude agents` は Research Preview のため **(プレビュー)** 表記をより強調すべきか確認
+- [ ] `/goal` コマンドの反映先を keybindings のみにしたが、09-agent-sdk や 10-parallel-execution への記載が適切か確認
+- [ ] v2.1.142 の「Fast mode now uses Opus 4.7 by default」を guide/02-setup.md に反映すべきか確認
